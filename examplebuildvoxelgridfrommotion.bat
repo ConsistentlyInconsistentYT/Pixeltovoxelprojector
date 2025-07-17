@@ -1,7 +1,7 @@
 @echo off
 
 rem Build with g++
-g++ -std=c++17 -O2 ray_voxel.cpp -o ray_voxel
+g++ -W -Wall -std=c++17 -O2 ray_voxel.cpp -o ray_voxel
 if %ERRORLEVEL% NEQ 0 (
     echo [Error] Compilation failed
     pause
