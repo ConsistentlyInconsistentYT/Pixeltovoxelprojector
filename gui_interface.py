@@ -82,7 +82,16 @@ class PixeltovoxelGUI:
         self.main_frame.columnconfigure(1, weight=1)
         self.main_frame.columnconfigure(2, weight=1)
         self.main_frame.rowconfigure(1, weight=1)
+        self.main_frame.rowconfigure(2, weight=1)
         self.main_frame.rowconfigure(3, weight=1)
+
+        # Camera footage frame
+        self.camera_frame = ttk.LabelFrame(
+            self.main_frame,
+            text="📹 Camera Footage Input",
+            padding="10"
+        )
+        self.camera_frame.grid(row=2, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=(5, 0))
 
         # Title
         self.title_label = ttk.Label(
@@ -151,10 +160,17 @@ class PixeltovoxelGUI:
         self.npy_expanded = False
         self.current_npy_file = None
 
+        # Camera footage variables
+        self.camera_images_path = None
+        self.metadata_path = None
+        self.camera_data = None
+        self.image_files = []
+
     def create_widgets(self):
         """Create all GUI widgets."""
         self.create_control_panel()
         self.create_output_panel()
+        self.create_camera_footage_panel()
         self.create_npy_viewer_panel()
         self.create_log_panel()
 
@@ -321,6 +337,271 @@ class PixeltovoxelGUI:
 
         # Bind double-click event
         self.file_tree.bind("<Double-1>", self.open_file)
+
+    def create_camera_footage_panel(self):
+        """Create the camera footage input panel."""
+        # Configure grid for camera frame
+        self.camera_frame.columnconfigure(0, weight=1)
+        self.camera_frame.columnconfigure(1, weight=1)
+        self.camera_frame.columnconfigure(2, weight=2)
+
+        # Title and description
+        ttk.Label(self.camera_frame, text="Load Camera Footage for Motion Tracking", font=("Segoe UI", 10, "bold")) \
+            .grid(row=0, column=0, columnspan=3, sticky=tk.W, pady=(0, 10))
+
+        # Folder selection buttons
+        self.images_btn = ttk.Button(
+            self.camera_frame, text="📁 Select Images Folder",
+            command=self.select_images_folder
+        )
+        self.images_btn.grid(row=1, column=0, sticky=tk.W, padx=(0, 5), pady=2)
+
+        self.metadata_btn = ttk.Button(
+            self.camera_frame, text="📋 Select Metadata File",
+            command=self.select_metadata_file
+        )
+        self.metadata_btn.grid(row=1, column=1, sticky=tk.W, padx=(0, 5), pady=2)
+
+        # Status indicators
+        self.images_path_label = ttk.Label(self.camera_frame, text="Images: None", foreground="red")
+        self.images_path_label.grid(row=2, column=0, columnspan=2, sticky=tk.W, pady=2)
+
+        self.metadata_path_label = ttk.Label(self.camera_frame, text="Metadata: None", foreground="red")
+        self.metadata_path_label.grid(row=3, column=0, columnspan=2, sticky=tk.W, pady=2)
+
+        # Validation and preview buttons
+        self.validate_btn = ttk.Button(
+            self.camera_frame, text="✅ Validate Metadata",
+            command=self.validate_metadata, state="disabled"
+        )
+        self.validate_btn.grid(row=4, column=0, sticky=tk.W, pady=(10, 5))
+
+        self.preview_btn = ttk.Button(
+            self.camera_frame, text="👁️ Preview Sequence",
+            command=self.preview_sequence, state="disabled"
+        )
+        self.preview_btn.grid(row=4, column=1, sticky=tk.W, pady=(10, 5))
+
+        # Clear button
+        ttk.Button(self.camera_frame, text="🗑️ Clear Data",
+                  command=self.clear_camera_data).grid(row=4, column=2, sticky=tk.W, pady=(10, 5))
+
+        # Metadata display frame
+        self.metadata_display_frame = ttk.LabelFrame(self.camera_frame, text="📊 Camera Metadata", padding="5")
+        self.metadata_display_frame.grid(row=5, column=0, columnspan=3, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(10, 0))
+
+        # Configure metadata display
+        self.metadata_display_frame.columnconfigure(0, weight=1)
+        self.metadata_display_frame.columnconfigure(1, weight=1)
+
+        # Metadata display widgets
+        self.metadata_text = scrolledtext.ScrolledText(
+            self.metadata_display_frame,
+            wrap=tk.WORD,
+            height=8,
+            state='disabled',
+            font=("Consolas", 9)
+        )
+        self.metadata_text.grid(row=0, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S), pady=5)
+
+        # Statistics labels
+        ttk.Label(self.metadata_display_frame, text="Frames:").grid(row=1, column=0, sticky=tk.W, padx=5)
+        self.frame_count_label = ttk.Label(self.metadata_display_frame, text="0")
+        self.frame_count_label.grid(row=1, column=1, sticky=tk.W)
+
+        ttk.Label(self.metadata_display_frame, text="Cameras:").grid(row=2, column=0, sticky=tk.W, padx=5)
+        self.camera_count_label = ttk.Label(self.metadata_display_frame, text="0")
+        self.camera_count_label.grid(row=2, column=1, sticky=tk.W)
+
+        ttk.Label(self.metadata_display_frame, text="Status:").grid(row=3, column=0, sticky=tk.W, padx=5)
+        self.metadata_status_label = ttk.Label(self.metadata_display_frame, text="Not loaded", foreground="red")
+        self.metadata_status_label.grid(row=3, column=1, sticky=tk.W)
+
+    def select_images_folder(self):
+        """Select folder containing camera images."""
+        folder_path = filedialog.askdirectory(title="Select Images Folder")
+        if folder_path:
+            self.camera_images_path = Path(folder_path)
+            image_extensions = {'.png', '.jpg', '.jpeg', '.bmp', '.tiff'}
+            self.image_files = [
+                f for f in self.camera_images_path.iterdir()
+                if f.is_file() and f.suffix.lower() in image_extensions
+            ]
+            self.image_files.sort()
+            self.images_path_label.config(
+                text=f"Images: {self.camera_images_path.name} ({len(self.image_files)} files)",
+                foreground="green"
+            )
+            self.log_message(f"✓ Loaded {len(self.image_files)} images from {self.camera_images_path.name}")
+
+            # Enable validate button if both paths are set
+            if self.metadata_path:
+                self.validate_btn.config(state="normal")
+                self.preview_btn.config(state="normal")
+            self.update_status()
+
+    def select_metadata_file(self):
+        """Select metadata.json file."""
+        file_path = filedialog.askopenfilename(
+            title="Select Metadata File",
+            filetypes=[("JSON files", "*.json"), ("All files", "*.*")]
+        )
+        if file_path:
+            self.metadata_path = Path(file_path)
+            self.metadata_path_label.config(
+                text=f"Metadata: {self.metadata_path.name}",
+                foreground="green"
+            )
+            self.log_message(f"✓ Selected metadata file: {self.metadata_path.name}")
+
+            # Enable validate button if both paths are set
+            if self.camera_images_path:
+                self.validate_btn.config(state="normal")
+                self.preview_btn.config(state="normal")
+
+    def validate_metadata(self):
+        """Validate and parse metadata.json file."""
+        try:
+            with open(self.metadata_path, 'r') as f:
+                data = json.load(f)
+
+            # Validate data structure
+            if not isinstance(data, list):
+                raise ValueError("Metadata must be a list of camera entries")
+
+            if len(data) == 0:
+                raise ValueError("No camera entries found in metadata")
+
+            # Validate each entry
+            required_fields = ["camera_index", "frame_index", "camera_position",
+                             "yaw", "pitch", "roll", "image_file"]
+
+            validated_data = []
+            cameras = set()
+            frames = set()
+
+            for i, entry in enumerate(data):
+                for field in required_fields:
+                    if field not in entry:
+                        raise ValueError(f"Missing field '{field}' in entry {i+1}")
+
+                if not isinstance(entry["camera_position"], list) or len(entry["camera_position"]) != 3:
+                    raise ValueError(f"camera_position must be a 3-element list in entry {i+1}")
+
+                cameras.add(entry["camera_index"])
+                frames.add(entry["frame_index"])
+                validated_data.append(entry)
+
+            self.camera_data = validated_data
+
+            # Update UI
+            self.frame_count_label.config(text=str(len(frames)))
+            self.camera_count_label.config(text=str(len(cameras)))
+            self.metadata_status_label.config(text="Valid ✓", foreground="green")
+
+            # Display metadata in text area
+            self.metadata_text.config(state='normal')
+            self.metadata_text.delete(1.0, tk.END)
+            self.metadata_text.insert(tk.END, json.dumps(validated_data[:5], indent=2))  # Show first 5 entries
+            if len(validated_data) > 5:
+                self.metadata_text.insert(tk.END, f"\n[... and {len(validated_data)-5} more entries]")
+            self.metadata_text.config(state='disabled')
+
+            self.log_message(f"✓ Validated metadata: {len(cameras)} cameras, {len(frames)} frames")
+
+        except Exception as e:
+            error_msg = f"Metadata validation error: {str(e)}"
+            messagebox.showerror("Metadata Error", error_msg)
+            self.metadata_status_label.config(text="Invalid ✗", foreground="red")
+            self.log_message(f"❌ {error_msg}")
+
+    def preview_sequence(self):
+        """Preview the image sequence."""
+        if not self.image_files:
+            messagebox.showwarning("Preview Error", "No image files loaded")
+            return
+
+        try:
+            from PIL import Image
+
+            # Create a simple preview window
+            preview_window = tk.Toplevel(self.root)
+            preview_window.title("Image Sequence Preview")
+            preview_window.geometry("800x600")
+
+            # Create canvas and scrollbar
+            canvas = tk.Canvas(preview_window)
+            scrollbar = ttk.Scrollbar(preview_window, orient="vertical", command=canvas.yview)
+            scrollable_frame = ttk.Frame(canvas)
+
+            scrollable_frame.bind(
+                "<Configure>",
+                lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+            )
+
+            canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+            canvas.configure(yscrollcommand=scrollbar.set)
+
+            # Add thumbnail images
+            max_images = min(20, len(self.image_files))  # Limit to 20 thumbnails
+            for i, img_file in enumerate(self.image_files[:max_images]):
+                try:
+                    img = Image.open(img_file)
+                    img.thumbnail((150, 150))
+                    photo = tk.PhotoImage(file=str(img_file))
+
+                    frame = ttk.Frame(scrollable_frame, borderwidth=1, relief="sunken")
+                    frame.grid(row=i//4, column=i%4, padx=5, pady=5)
+
+                    img_label = ttk.Label(frame, image=photo)
+                    img_label.image = photo  # Keep reference
+                    img_label.pack()
+
+                    name_label = ttk.Label(frame, text=img_file.name, font=("Segoe UI", 8))
+                    name_label.pack(pady=(2, 0))
+
+                except Exception as img_error:
+                    error_frame = ttk.Frame(scrollable_frame, borderwidth=1, relief="sunken")
+                    error_frame.grid(row=i//4, column=i%4, padx=5, pady=5)
+                    ttk.Label(error_frame, text=f"Error loading: {img_file.name}",
+                             foreground="red", font=("Segoe UI", 8)).pack()
+
+            # Layout
+            canvas.pack(side="left", fill="both", expand=True)
+            scrollbar.pack(side="right", fill="y")
+
+            self.log_message(f"✓ Opened image sequence preview ({max_images} thumbnails)")
+
+        except ImportError:
+            messagebox.showinfo("Preview Info", "PIL (Pillow) not installed. Install with: pip install Pillow")
+        except Exception as e:
+            error_msg = f"Preview error: {str(e)}"
+            messagebox.showerror("Preview Error", error_msg)
+            self.log_message(f"❌ {error_msg}")
+
+    def clear_camera_data(self):
+        """Clear all camera data and reset UI."""
+        self.camera_images_path = None
+        self.metadata_path = None
+        self.camera_data = None
+        self.image_files = []
+
+        # Reset UI
+        self.images_path_label.config(text="Images: None", foreground="red")
+        self.metadata_path_label.config(text="Metadata: None", foreground="red")
+
+        self.validate_btn.config(state="disabled")
+        self.preview_btn.config(state="disabled")
+
+        self.frame_count_label.config(text="0")
+        self.camera_count_label.config(text="0")
+        self.metadata_status_label.config(text="Not loaded", foreground="red")
+
+        self.metadata_text.config(state='normal')
+        self.metadata_text.delete(1.0, tk.END)
+        self.metadata_text.config(state='disabled')
+
+        self.log_message("✓ Cleared all camera data")
 
     def create_npy_viewer_panel(self):
         """Create the NPY file viewer panel."""
