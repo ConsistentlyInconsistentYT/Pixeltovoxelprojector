@@ -9,49 +9,11 @@ import os
 # Import the compiled C++ module
 import process_image_cpp
 
+import argparse
+
 # -------------------------------------------------------------------------------------
-# Configurable Parameters
+# Helper Functions
 # -------------------------------------------------------------------------------------
-
-# The voxel grid is a 3D array where we accumulate brightness values from rays cast
-# through space. Adjust voxel_grid_size and grid_extent for your scenario.
-voxel_grid_size = (400, 400, 400)  # Number of voxels in (x, y, z) directions
-grid_extent = 3e12  # Half the length of one side of the voxel cube (in meters)
-
-# The position and orientation of the voxel grid is determined based on RA/Dec.
-# We choose a RA/Dec and assume the voxel grid is centered along that line-of-sight
-# at distance_from_sun.
-distance_from_sun = 1.496e+11 * 41.714231  # Approximately 1 AU in meters
-center_ra = 280.50  # Center RA in degrees
-center_dec = -20.  # Center Dec in degrees
-
-# distance_from_sun = 1.496e+11 * 34  # Approximately 1 AU in meters
-# center_ra = 287.967022  # Center RA in degrees
-# center_dec = -20.713745  # Center Dec in degrees
-
-# Threshold used to identify "significant" voxels (e.g., top 90% brightness).
-brightness_threshold_percentile = .1
-
-# Ray casting parameters: how far and how finely we cast rays into space.
-max_distance = distance_from_sun * 100# Maximum distance (in meters) for ray casting
-num_steps = 20000     # Number of steps along each ray
-
-# Visualization parameters for plots.
-marker_size = 5  # Marker size for scatter plots
-alpha = 0.5      # Transparency for scatter points
-
-# Default field-of-view (FOV) if not found in FITS header (in arcminutes).
-default_fov_arcminutes = 2.7
-
-# Directory containing FITS files
-fits_directory = 'fits'
-
-# Define the sky patch parameters for building a celestial sphere texture:
-# We'll project the image directions onto this sky patch.
-angular_width = 5.0    # Angular width of sky patch in degrees
-angular_height = 5.0   # Angular height of sky patch in degrees
-texture_width = 1024   # Texture width (pixels)
-texture_height = 1024  # Texture height (pixels)
 
 # -------------------------------------------------------------------------------------
 # Helper Functions
@@ -224,10 +186,10 @@ def process_image(fits_file, voxel_grid, voxel_grid_extent, celestial_sphere_tex
         ]
 
         # Define sky patch in radians
-        c_ra_rad = np.deg2rad(center_ra)
-        c_dec_rad = np.deg2rad(center_dec)
-        aw_rad = np.deg2rad(angular_width)
-        ah_rad = np.deg2rad(angular_height)
+        c_ra_rad = np.deg2rad(args.center_ra)
+        c_dec_rad = np.deg2rad(args.center_dec)
+        aw_rad = np.deg2rad(args.angular_width)
+        ah_rad = np.deg2rad(args.angular_height)
 
         # Call C++ function to process the image
         process_image_cpp.process_image_cpp(
@@ -240,7 +202,7 @@ def process_image(fits_file, voxel_grid, voxel_grid_extent, celestial_sphere_tex
             voxel_grid,
             voxel_grid_extent_list,
             max_distance,
-            num_steps,
+            args.num_steps,
             celestial_sphere_texture,
             c_ra_rad,
             c_dec_rad,
@@ -253,6 +215,30 @@ def process_image(fits_file, voxel_grid, voxel_grid_extent, celestial_sphere_tex
     return earth_position, pointing_direction, obs_time
 
 def main():
+    parser = argparse.ArgumentParser(description='Process FITS files and create a voxel grid.')
+    parser.add_argument('--fits_directory', type=str, required=True, help='Directory containing the FITS files.')
+    parser.add_argument('--output_file', type=str, required=True, help='Path to save the resulting voxel grid.')
+    parser.add_argument('--center_ra', type=float, required=True, help='Center Right Ascension of the voxel grid in degrees.')
+    parser.add_argument('--center_dec', type=float, required=True, help='Center Declination of the voxel grid in degrees.')
+    parser.add_argument('--distance_from_sun', type=float, required=True, help='Distance from the sun to the center of the voxel grid in AU.')
+    parser.add_argument('--voxel_grid_size', type=int, default=400, help='Number of voxels in each direction.')
+    parser.add_argument('--grid_extent', type=float, default=3e12, help='Half the length of one side of the voxel cube in meters.')
+    parser.add_argument('--brightness_threshold_percentile', type=float, default=0.1, help='Threshold to identify significant voxels.')
+    parser.add_argument('--max_distance_factor', type=float, default=100.0, help='Factor to multiply distance_from_sun by to get max_distance.')
+    parser.add_argument('--num_steps', type=int, default=20000, help='Number of steps along each ray.')
+    parser.add_argument('--marker_size', type=int, default=5, help='Marker size for scatter plots.')
+    parser.add_argument('--alpha', type=float, default=0.5, help='Transparency for scatter points.')
+    parser.add_argument('--default_fov_arcminutes', type=float, default=2.7, help='Default FOV in arcminutes.')
+    parser.add_argument('--angular_width', type=float, default=5.0, help='Angular width of sky patch in degrees.')
+    parser.add_argument('--angular_height', type=float, default=5.0, help='Angular height of sky patch in degrees.')
+    parser.add_argument('--texture_width', type=int, default=1024, help='Texture width in pixels.')
+    parser.add_argument('--texture_height', type=int, default=1024, help='Texture height in pixels.')
+    args = parser.parse_args()
+
+    distance_from_sun = 1.496e+11 * args.distance_from_sun
+    max_distance = distance_from_sun * args.max_distance_factor
+    voxel_grid_size = (args.voxel_grid_size, args.voxel_grid_size, args.voxel_grid_size)
+
     """
     Main function:
     1. Set up voxel grid and celestial sphere texture.
@@ -261,25 +247,25 @@ def main():
     """
 
     # Compute voxel grid center from RA/Dec
-    center_coord = SkyCoord(ra=center_ra*u.degree, dec=center_dec*u.degree, frame='icrs')
+    center_coord = SkyCoord(ra=args.center_ra*u.degree, dec=args.center_dec*u.degree, frame='icrs')
     direction_vector = center_coord.cartesian.xyz.value
     voxel_grid_center = direction_vector * distance_from_sun
 
     voxel_grid_extent = (
-        (voxel_grid_center[0] - grid_extent, voxel_grid_center[0] + grid_extent),
-        (voxel_grid_center[1] - grid_extent, voxel_grid_center[1] + grid_extent),
-        (voxel_grid_center[2] - grid_extent, voxel_grid_center[2] + grid_extent)
+        (voxel_grid_center[0] - args.grid_extent, voxel_grid_center[0] + args.grid_extent),
+        (voxel_grid_center[1] - args.grid_extent, voxel_grid_center[1] + args.grid_extent),
+        (voxel_grid_center[2] - args.grid_extent, voxel_grid_center[2] + args.grid_extent)
     )
 
     # Initialize voxel grid and celestial sphere texture
     voxel_grid = np.zeros(voxel_grid_size, dtype=np.float64)
-    celestial_sphere_texture = np.zeros((texture_height, texture_width), dtype=np.float64)
+    celestial_sphere_texture = np.zeros((args.texture_height, args.texture_width), dtype=np.float64)
 
     # List FITS files
-    fits_files = [os.path.join(fits_directory, f) for f in os.listdir(fits_directory) if f.endswith('.fits')]
+    fits_files = [os.path.join(args.fits_directory, f) for f in os.listdir(args.fits_directory) if f.endswith('.fits')]
 
     if not fits_files:
-        print(f"No FITS files found in directory '{fits_directory}'.")
+        print(f"No FITS files found in directory '{args.fits_directory}'.")
         return
 
     # Sort FITS files by observation time
@@ -321,7 +307,7 @@ def main():
 
     # Threshold for significant voxels
     if np.any(voxel_grid_avg > 0):
-        threshold = np.percentile(voxel_grid_avg[voxel_grid_avg > 0], brightness_threshold_percentile)
+        threshold = np.percentile(voxel_grid_avg[voxel_grid_avg > 0], args.brightness_threshold_percentile)
     else:
         threshold = 0
 
@@ -372,7 +358,7 @@ def main():
         fig = plt.figure(figsize=(10, 8))
         ax = fig.add_subplot(111, projection='3d')
 
-        sc = ax.scatter(x_coords, y_coords, z_coords, c=intensities, cmap='hot', marker='o', s=marker_size, alpha=alpha)
+        sc = ax.scatter(x_coords, y_coords, z_coords, c=intensities, cmap='hot', marker='o', s=args.marker_size, alpha=args.alpha)
         if intensities.size > 0:
             ax.scatter([brightest_x], [brightest_y], [brightest_z], c='blue', marker='*', s=100, label='Brightest Point')
 
@@ -396,7 +382,7 @@ def main():
         cmap = plt.cm.get_cmap('viridis')
 
         # Draw arrows from Earth positions in the direction of the camera pointing
-        arrow_length = grid_extent * 0.5
+        arrow_length = args.grid_extent * 0.5
         for idx, (pos, dir_vec, time_norm) in enumerate(zip(earth_positions, pointing_directions, times_norm)):
             x0, y0, z0 = pos
             dx = dir_vec[0] * arrow_length

@@ -1,0 +1,10 @@
+^C:\USERS\MAIL\ONEDRIVE\DOCUMENTS\GITHUB\PIXELTOVOXELPROJECTOR\BUILD\CMAKEFILES\A5DAA3CCC610ADC5F5A6F362848EE7A6\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector -BC:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/Pixeltovoxelprojector.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
