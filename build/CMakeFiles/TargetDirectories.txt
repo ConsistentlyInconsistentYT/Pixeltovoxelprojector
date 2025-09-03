@@ -1,0 +1,4 @@
+C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/process_image_cpp.dir
+C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/pybind11/CMakeFiles/ALL_BUILD.dir

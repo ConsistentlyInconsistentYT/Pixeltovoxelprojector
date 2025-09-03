@@ -158,35 +158,45 @@ def get_next_image_index(folder, prefix="voxel_", suffix=".png"):
     return max_index + 1
 
 
+import argparse
+
 def main():
+    parser = argparse.ArgumentParser(description='Visualize a voxel grid from a .bin file.')
+    parser.add_argument('--input_file', type=str, default='voxel_grid.bin', help='Path to the voxel_grid.bin file.')
+    parser.add_argument('--percentile', type=float, default=99.9, help='The percentile of brightness to display.')
+    parser.add_argument('--use_hard_thresh', action='store_true', help='Use a hard threshold instead of a percentile.')
+    parser.add_argument('--hard_thresh', type=float, default=700, help='The hard threshold value.')
+    parser.add_argument('--grid_center_x', type=float, default=30.0, help='X coordinate of the grid center.')
+    parser.add_argument('--grid_center_y', type=float, default=0.0, help='Y coordinate of the grid center.')
+    parser.add_argument('--grid_center_z', type=float, default=14000.0, help='Z coordinate of the grid center.')
+    parser.add_argument('--rx', type=float, default=90.0, help='Rotation angle around the X axis in degrees.')
+    parser.add_argument('--ry', type=float, default=270.0, help='Rotation angle around the Y axis in degrees.')
+    parser.add_argument('--rz', type=float, default=0.0, help='Rotation angle around the Z axis in degrees.')
+    args = parser.parse_args()
+
     # 1) Load the voxel grid
-    voxel_grid, vox_size = load_voxel_grid("voxel_grid.bin")
+    voxel_grid, vox_size = load_voxel_grid(args.input_file)
     print("Loaded voxel grid:", voxel_grid.shape, "voxel_size=", vox_size)
     print("Max voxel value:", voxel_grid.max())
 
     # 2) Define the grid center (x,y,z)
-    grid_center = np.array([30, 0, 14000], dtype=np.float32)
+    grid_center = np.array([args.grid_center_x, args.grid_center_y, args.grid_center_z], dtype=np.float32)
 
     # 3) Extract top percentile (Z-up)
-    percentile_to_show = 99.9
     points, intensities = extract_top_percentile_z_up(
         voxel_grid,
         voxel_size=vox_size,
         grid_center=grid_center,
-        percentile=percentile_to_show,
-        use_hard_thresh=False,
-        hard_thresh=700
+        percentile=args.percentile,
+        use_hard_thresh=args.use_hard_thresh,
+        hard_thresh=args.hard_thresh
     )
     if points is None:
         return  # nothing to show
 
     # 4) Optional rotation
     # e.g. rotate to fix orientation
-    rx_deg = 90
-    ry_deg = 270
-    rz_deg = 0
-
-    R = rotation_matrix_xyz(rx_deg, ry_deg, rz_deg)  # shape (3,3)
+    R = rotation_matrix_xyz(args.rx, args.ry, args.rz)  # shape (3,3)
     points_rot = points @ R.T
     # 5) PyVista Plotter (interactive)
     plotter = pv.Plotter(off_screen=True,)
