@@ -26,7 +26,7 @@
 // External libraries for JSON & image loading
 #include "nlohmann/json.hpp"
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "stb/stb_image.h"
 
 
 
