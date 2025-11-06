@@ -1,0 +1,353 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Windows - 10.0.26100 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Microsoft (R)-Build-Engine, Version 16.11.2+f32259642 für .NET Framework
+      Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+      
+      Der Buildvorgang wurde am 29.08.2025 10:05:43 gestartet.
+      Projekt "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\3.29.0\\CompilerIdC\\CompilerIdC.vcxproj" auf Knoten "1" (Standardziele).
+      PrepareForBuild:
+        Das Verzeichnis "Debug\\" wird erstellt.
+        Das Verzeichnis "Debug\\CompilerIdC.tlog\\" wird erstellt.
+      InitializeBuildStatus:
+        "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+      ClCompile:
+        C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc142.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
+        CMakeCCompilerId.c
+      Link:
+        C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
+        CompilerIdC.vcxproj -> C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\3.29.0\\CompilerIdC\\CompilerIdC.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_C_COMPILER=C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Die Datei "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" wird gelöscht.
+        Aktualisieren des Timestamps von "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
+      Die Erstellung von Projekt "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\3.29.0\\CompilerIdC\\CompilerIdC.vcxproj" ist abgeschlossen (Standardziele).
+      
+      Der Buildvorgang wurde erfolgreich ausgeführt.
+          0 Warnung(en)
+          0 Fehler
+      
+      Verstrichene Zeit 00:00:00.83
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+      
+      The C compiler identification is MSVC, found in:
+        C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/3.29.0/CompilerIdC/CompilerIdC.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Microsoft (R)-Build-Engine, Version 16.11.2+f32259642 für .NET Framework
+      Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+      
+      Der Buildvorgang wurde am 29.08.2025 10:05:44 gestartet.
+      Projekt "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\3.29.0\\CompilerIdCXX\\CompilerIdCXX.vcxproj" auf Knoten "1" (Standardziele).
+      PrepareForBuild:
+        Das Verzeichnis "Debug\\" wird erstellt.
+        Das Verzeichnis "Debug\\CompilerIdCXX.tlog\\" wird erstellt.
+      InitializeBuildStatus:
+        "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+      ClCompile:
+        C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc142.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\3.29.0\\CompilerIdCXX\\CompilerIdCXX.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Die Datei "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" wird gelöscht.
+        Aktualisieren des Timestamps von "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
+      Die Erstellung von Projekt "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\3.29.0\\CompilerIdCXX\\CompilerIdCXX.vcxproj" ist abgeschlossen (Standardziele).
+      
+      Der Buildvorgang wurde erfolgreich ausgeführt.
+          0 Warnung(en)
+          0 Fehler
+      
+      Verstrichene Zeit 00:00:00.48
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/3.29.0/CompilerIdCXX/CompilerIdCXX.exe
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:64 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-feg1q4"
+      binary: "C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-feg1q4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-feg1q4'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin/MSBuild.exe" cmTC_8716b.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=16.0 /v:n
+        Microsoft (R)-Build-Engine, Version 16.11.2+f32259642 für .NET Framework
+        Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+        
+        Der Buildvorgang wurde am 29.08.2025 10:05:45 gestartet.
+        Projekt "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-feg1q4\\cmTC_8716b.vcxproj" auf Knoten "1" (Standardziele).
+        PrepareForBuild:
+          Das Verzeichnis "cmTC_8716b.dir\\Debug\\" wird erstellt.
+          Das Verzeichnis "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-feg1q4\\Debug\\" wird erstellt.
+          Das Verzeichnis "cmTC_8716b.dir\\Debug\\cmTC_8716b.tlog\\" wird erstellt.
+        InitializeBuildStatus:
+          "cmTC_8716b.dir\\Debug\\cmTC_8716b.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_8716b.dir\\Debug\\\\" /Fd"cmTC_8716b.dir\\Debug\\vc142.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
+          Microsoft (R) C/C++-Optimierungscompiler Version 19.29.30154 für x64
+          Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+          CMakeCCompilerABI.c
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_8716b.dir\\Debug\\\\" /Fd"cmTC_8716b.dir\\Debug\\vc142.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-feg1q4\\Debug\\cmTC_8716b.exe" /INCREMENTAL /ILK:"cmTC_8716b.dir\\Debug\\cmTC_8716b.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-feg1q4/Debug/cmTC_8716b.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-feg1q4/Debug/cmTC_8716b.lib" /MACHINE:X64  /machine:x64 cmTC_8716b.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_8716b.vcxproj -> C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-feg1q4\\Debug\\cmTC_8716b.exe
+        FinalizeBuildStatus:
+          Die Datei "cmTC_8716b.dir\\Debug\\cmTC_8716b.tlog\\unsuccessfulbuild" wird gelöscht.
+          Aktualisieren des Timestamps von "cmTC_8716b.dir\\Debug\\cmTC_8716b.tlog\\cmTC_8716b.lastbuildstate".
+        Die Erstellung von Projekt "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-feg1q4\\cmTC_8716b.vcxproj" ist abgeschlossen (Standardziele).
+        
+        Der Buildvorgang wurde erfolgreich ausgeführt.
+            0 Warnung(en)
+            0 Fehler
+        
+        Verstrichene Zeit 00:00:00.45
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:170 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'C': C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:207 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.29.30154.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:64 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-diwlgw"
+      binary: "C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-diwlgw"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-diwlgw'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin/MSBuild.exe" cmTC_6e07d.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=16.0 /v:n
+        Microsoft (R)-Build-Engine, Version 16.11.2+f32259642 für .NET Framework
+        Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+        
+        Der Buildvorgang wurde am 29.08.2025 10:05:46 gestartet.
+        Projekt "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-diwlgw\\cmTC_6e07d.vcxproj" auf Knoten "1" (Standardziele).
+        PrepareForBuild:
+          Das Verzeichnis "cmTC_6e07d.dir\\Debug\\" wird erstellt.
+          Das Verzeichnis "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-diwlgw\\Debug\\" wird erstellt.
+          Das Verzeichnis "cmTC_6e07d.dir\\Debug\\cmTC_6e07d.tlog\\" wird erstellt.
+        InitializeBuildStatus:
+          "cmTC_6e07d.dir\\Debug\\cmTC_6e07d.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_6e07d.dir\\Debug\\\\" /Fd"cmTC_6e07d.dir\\Debug\\vc142.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++-Optimierungscompiler Version 19.29.30154 für x64
+          Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+          CMakeCXXCompilerABI.cpp
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_6e07d.dir\\Debug\\\\" /Fd"cmTC_6e07d.dir\\Debug\\vc142.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-diwlgw\\Debug\\cmTC_6e07d.exe" /INCREMENTAL /ILK:"cmTC_6e07d.dir\\Debug\\cmTC_6e07d.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-diwlgw/Debug/cmTC_6e07d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-diwlgw/Debug/cmTC_6e07d.lib" /MACHINE:X64  /machine:x64 cmTC_6e07d.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_6e07d.vcxproj -> C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-diwlgw\\Debug\\cmTC_6e07d.exe
+        FinalizeBuildStatus:
+          Die Datei "cmTC_6e07d.dir\\Debug\\cmTC_6e07d.tlog\\unsuccessfulbuild" wird gelöscht.
+          Aktualisieren des Timestamps von "cmTC_6e07d.dir\\Debug\\cmTC_6e07d.tlog\\cmTC_6e07d.lastbuildstate".
+        Die Erstellung von Projekt "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-diwlgw\\cmTC_6e07d.vcxproj" ist abgeschlossen (Standardziele).
+        
+        Der Buildvorgang wurde erfolgreich ausgeführt.
+            0 Warnung(en)
+            0 Fehler
+        
+        Verstrichene Zeit 00:00:00.47
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:170 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:207 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.29.30154.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.29/Modules/CheckCXXCompilerFlag.cmake:34 (cmake_check_compiler_flag)"
+      - "pybind11/tools/pybind11Common.cmake:321 (check_cxx_compiler_flag)"
+      - "pybind11/tools/pybind11Common.cmake:393 (_pybind11_return_if_cxx_and_linker_flags_work)"
+      - "pybind11/tools/pybind11Common.cmake:427 (_pybind11_generate_lto)"
+      - "pybind11/CMakeLists.txt:296 (include)"
+    checks:
+      - "Performing Test HAS_MSVC_GL_LTCG"
+    directories:
+      source: "C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-1lm13l"
+      binary: "C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-1lm13l"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "HAS_MSVC_GL_LTCG"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-1lm13l'
+        
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin/MSBuild.exe" cmTC_f58ba.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=16.0 /v:n
+        Microsoft (R)-Build-Engine, Version 16.11.2+f32259642 für .NET Framework
+        Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+        
+        Der Buildvorgang wurde am 29.08.2025 10:06:29 gestartet.
+        Projekt "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1lm13l\\cmTC_f58ba.vcxproj" auf Knoten "1" (Standardziele).
+        PrepareForBuild:
+          Das Verzeichnis "cmTC_f58ba.dir\\Debug\\" wird erstellt.
+          Das Verzeichnis "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1lm13l\\Debug\\" wird erstellt.
+          Das Verzeichnis "cmTC_f58ba.dir\\Debug\\cmTC_f58ba.tlog\\" wird erstellt.
+        InitializeBuildStatus:
+          "cmTC_f58ba.dir\\Debug\\cmTC_f58ba.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+        ClCompile:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /GL /D _MBCS /D WIN32 /D _WINDOWS /D HAS_MSVC_GL_LTCG /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"cmTC_f58ba.dir\\Debug\\\\" /Fd"cmTC_f58ba.dir\\Debug\\vc142.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1lm13l\\src.cxx"
+          Microsoft (R) C/C++-Optimierungscompiler Version 19.29.30154 für x64
+          Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+          src.cxx
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /GL /D _MBCS /D WIN32 /D _WINDOWS /D HAS_MSVC_GL_LTCG /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /std:c++17 /Fo"cmTC_f58ba.dir\\Debug\\\\" /Fd"cmTC_f58ba.dir\\Debug\\vc142.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1lm13l\\src.cxx"
+        Link:
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1lm13l\\Debug\\cmTC_f58ba.exe" /INCREMENTAL /ILK:"cmTC_f58ba.dir\\Debug\\cmTC_f58ba.ilk" /NOLOGO "-LTCG" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-1lm13l/Debug/cmTC_f58ba.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/CMakeScratch/TryCompile-1lm13l/Debug/cmTC_f58ba.lib" /MACHINE:X64  /machine:x64 cmTC_f58ba.dir\\Debug\\src.obj
+        LINK : warning LNK4075: /INCREMENTAL wird aufgrund der Angabe von /LTCG ignoriert. [C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1lm13l\\cmTC_f58ba.vcxproj]
+          Code wird generiert.
+          Codegenerierung ist abgeschlossen.
+          cmTC_f58ba.vcxproj -> C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1lm13l\\Debug\\cmTC_f58ba.exe
+        FinalizeBuildStatus:
+          Die Datei "cmTC_f58ba.dir\\Debug\\cmTC_f58ba.tlog\\unsuccessfulbuild" wird gelöscht.
+          Aktualisieren des Timestamps von "cmTC_f58ba.dir\\Debug\\cmTC_f58ba.tlog\\cmTC_f58ba.lastbuildstate".
+        Die Erstellung von Projekt "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1lm13l\\cmTC_f58ba.vcxproj" ist abgeschlossen (Standardziele).
+        
+        Der Buildvorgang wurde erfolgreich ausgeführt.
+        
+        "C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1lm13l\\cmTC_f58ba.vcxproj" (Standardziel) (1) ->
+        (Link Ziel) -> 
+          LINK : warning LNK4075: /INCREMENTAL wird aufgrund der Angabe von /LTCG ignoriert. [C:\\Users\\mail\\OneDrive\\Documents\\GitHub\\Pixeltovoxelprojector\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1lm13l\\cmTC_f58ba.vcxproj]
+        
+            1 Warnung(en)
+            0 Fehler
+        
+        Verstrichene Zeit 00:00:00.66
+        
+      exitCode: 0
+...

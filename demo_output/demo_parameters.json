@@ -1,0 +1,15 @@
+{
+  "image_shape": [
+    768,
+    1024
+  ],
+  "voxel_shape": [
+    50,
+    50,
+    50
+  ],
+  "texture_shape": [
+    360,
+    180
+  ]
+}

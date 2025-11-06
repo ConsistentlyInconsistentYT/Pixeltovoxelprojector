@@ -1,0 +1,9 @@
+{
+  "star_count": 100,
+  "image_width": 1024,
+  "image_height": 768,
+  "voxel_size": 50,
+  "fov_degrees": 45.0,
+  "voxel_range": 1000,
+  "auto_save": true
+}

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\mail\OneDrive\Documents\GitHub\Pixeltovoxelprojector\build\CMakeFiles\a5daa3ccc610adc5f5a6f362848ee7a6\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{D9AC05E4-0776-3788-9286-19E822BE42B8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

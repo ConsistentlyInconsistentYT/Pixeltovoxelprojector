@@ -1,0 +1,10 @@
+^C:\USERS\MAIL\ONEDRIVE\DOCUMENTS\GITHUB\PIXELTOVOXELPROJECTOR\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector -BC:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build --check-stamp-file C:/Users/mail/OneDrive/Documents/GitHub/Pixeltovoxelprojector/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
