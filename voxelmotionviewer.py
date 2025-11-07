@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 pyvista_interactive_view_with_rotation_history.py
 
