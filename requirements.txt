@@ -1,0 +1,6 @@
+pybind11
+setuptools
+wheel
+numpy
+matplotlib
+astropy
