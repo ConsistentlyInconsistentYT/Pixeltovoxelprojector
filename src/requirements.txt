@@ -1,0 +1,23 @@
+# 8K Video Processing Pipeline Requirements
+
+# Core dependencies
+numpy>=1.19.0
+opencv-python>=4.5.0
+opencv-contrib-python>=4.5.0
+
+# Python bindings for C++
+pybind11>=2.6.0
+
+# Video codec support
+ffmpeg-python>=0.2.0
+
+# Optional GPU acceleration (CUDA)
+# cupy-cuda11x>=9.0.0  # Uncomment if using CUDA 11.x
+# cupy-cuda12x>=12.0.0  # Uncomment if using CUDA 12.x
+
+# Performance monitoring
+psutil>=5.8.0
+
+# Development dependencies
+pytest>=6.2.0
+pytest-benchmark>=3.4.0

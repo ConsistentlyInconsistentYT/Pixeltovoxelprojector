@@ -1,0 +1,16 @@
+# Calibration System Requirements
+
+# Core dependencies
+numpy>=1.21.0
+opencv-python>=4.5.0
+opencv-contrib-python>=4.5.0
+
+# Scientific computing
+scipy>=1.7.0
+
+# Linear algebra (for C++ bindings)
+# Note: Eigen3 must be installed system-wide for C++ components
+
+# Optional: For advanced calibration
+# scikit-learn>=1.0.0  # For RANSAC and robust estimation
+# matplotlib>=3.4.0     # For visualization

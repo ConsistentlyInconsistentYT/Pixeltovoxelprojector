@@ -1,0 +1,26 @@
+# Monitoring System Requirements
+
+# Core dependencies
+psutil>=5.9.0           # System and hardware monitoring
+numpy>=1.21.0           # Numerical operations
+scipy>=1.7.0            # Statistical analysis
+
+# Web dashboard
+flask>=2.3.0            # Web server
+flask-socketio>=5.3.0   # Real-time WebSocket support
+python-socketio>=5.9.0  # Socket.IO implementation
+
+# Alert notifications
+requests>=2.31.0        # HTTP requests for webhooks
+
+# Optional GPU monitoring
+# Uncomment if you have NVIDIA GPUs:
+# pynvml>=11.5.0        # NVIDIA GPU monitoring
+# GPUtil>=1.4.0         # Alternative GPU monitoring
+
+# Optional shared memory (Linux)
+# posix-ipc              # POSIX shared memory
+
+# Development/testing
+pytest>=7.0.0           # Testing framework
+pytest-cov>=4.0.0       # Coverage reporting

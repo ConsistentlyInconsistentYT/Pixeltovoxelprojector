@@ -1,0 +1,191 @@
+version: '3.8'
+
+# ============================================================================
+# Pixel to Voxel Projector - Docker Compose Configuration
+# ============================================================================
+
+services:
+  # Main application service
+  pixeltovoxel:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        - CUDA_VERSION=12.2.0
+    image: pixeltovoxel:latest
+    container_name: pixeltovoxel_app
+
+    # GPU configuration
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, utility, video]
+
+    # Runtime configuration
+    runtime: nvidia
+
+    # Environment variables
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,video
+      - DISPLAY=${DISPLAY:-:0}
+      - PYTHONUNBUFFERED=1
+      - OMP_NUM_THREADS=8
+      - CUDA_VISIBLE_DEVICES=0
+
+    # Volumes
+    volumes:
+      # Mount source code for development
+      - ../:/app
+      # Data directory
+      - ${DATA_DIR:-./data}:/data
+      # Output directory
+      - ${OUTPUT_DIR:-./output}:/output
+      # Logs directory
+      - ${LOGS_DIR:-./logs}:/logs
+      # X11 socket for GUI applications
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # Shared memory for high-speed data transfer
+      - /dev/shm:/dev/shm
+
+    # Network configuration
+    network_mode: host
+
+    # Ports (if not using host network)
+    # ports:
+    #   - "8888:8888"  # Jupyter
+    #   - "5555:5555"  # ZMQ publisher
+    #   - "5556:5556"  # ZMQ subscriber
+    #   - "6006:6006"  # TensorBoard
+
+    # Privileges for GPU and hardware access
+    privileged: true
+
+    # Devices
+    devices:
+      - /dev/video0:/dev/video0  # Camera access (adjust as needed)
+
+    # Shared memory size (important for PyTorch DataLoader)
+    shm_size: '8gb'
+
+    # Keep container running
+    stdin_open: true
+    tty: true
+
+    # Command
+    command: /bin/bash
+
+  # Jupyter service for interactive development
+  jupyter:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: pixeltovoxel:latest
+    container_name: pixeltovoxel_jupyter
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    runtime: nvidia
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - PYTHONUNBUFFERED=1
+
+    volumes:
+      - ../:/app
+      - ${DATA_DIR:-./data}:/data
+      - ${OUTPUT_DIR:-./output}:/output
+      - ${LOGS_DIR:-./logs}:/logs
+
+    ports:
+      - "8888:8888"
+
+    shm_size: '8gb'
+
+    command: >
+      jupyter lab
+      --ip=0.0.0.0
+      --port=8888
+      --no-browser
+      --allow-root
+      --NotebookApp.token=''
+      --NotebookApp.password=''
+
+  # Benchmark service for performance testing
+  benchmark:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: pixeltovoxel:latest
+    container_name: pixeltovoxel_benchmark
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    runtime: nvidia
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - PYTHONUNBUFFERED=1
+
+    volumes:
+      - ../:/app
+      - ${OUTPUT_DIR:-./output}:/output
+      - ${LOGS_DIR:-./logs}:/logs
+
+    shm_size: '8gb'
+
+    command: python3 /app/tests/benchmarks/run_all_benchmarks.py
+
+# ============================================================================
+# Usage Instructions
+# ============================================================================
+#
+# Start all services:
+#   docker-compose -f docker/docker-compose.yml up -d
+#
+# Start specific service:
+#   docker-compose -f docker/docker-compose.yml up pixeltovoxel
+#
+# Start with GPU selection:
+#   CUDA_VISIBLE_DEVICES=0 docker-compose -f docker/docker-compose.yml up
+#
+# Start Jupyter only:
+#   docker-compose -f docker/docker-compose.yml up jupyter
+#
+# Run benchmarks:
+#   docker-compose -f docker/docker-compose.yml up benchmark
+#
+# Access running container:
+#   docker-compose -f docker/docker-compose.yml exec pixeltovoxel bash
+#
+# View logs:
+#   docker-compose -f docker/docker-compose.yml logs -f pixeltovoxel
+#
+# Stop all services:
+#   docker-compose -f docker/docker-compose.yml down
+#
+# Rebuild and start:
+#   docker-compose -f docker/docker-compose.yml up --build
+#
+# Set custom directories:
+#   DATA_DIR=/path/to/data OUTPUT_DIR=/path/to/output \
+#   docker-compose -f docker/docker-compose.yml up
+#
+# ============================================================================

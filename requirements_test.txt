@@ -1,0 +1,33 @@
+# Testing Requirements
+# Install with: pip install -r requirements_test.txt
+
+# Core testing framework
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-timeout>=2.1.0
+pytest-benchmark>=4.0.0
+pytest-xdist>=3.3.0
+pytest-html>=3.2.0
+pytest-json-report>=1.5.0
+
+# Coverage reporting
+coverage>=7.2.0
+codecov>=2.1.13
+
+# Data science and numerical computing
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Computer vision
+opencv-python>=4.8.0
+opencv-contrib-python>=4.8.0
+
+# Utilities
+dataclasses-json>=0.5.9
+typing-extensions>=4.7.0
+
+# Logging and monitoring
+colorlog>=6.7.0
+
+# Optional: GPU support detection
+# torch>=2.0.0  # Uncomment if testing GPU features

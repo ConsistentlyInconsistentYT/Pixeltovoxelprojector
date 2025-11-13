@@ -1,0 +1,653 @@
+# ============================================================================
+# 8K MOTION TRACKING SYSTEM - SYSTEM CONFIGURATION
+# ============================================================================
+# This file configures the entire multi-camera tracking system
+# 10 camera pairs (20 cameras total) for 5km range motion tracking
+# ============================================================================
+
+# System Information
+system:
+  name: "8K Motion Tracking System"
+  version: "1.0.0"
+  description: "Multi-camera 8K motion tracking for 200+ simultaneous targets"
+  environment: "production"  # production, development, testing
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+
+# ============================================================================
+# CAMERA CONFIGURATION (10 Pairs = 20 Cameras)
+# ============================================================================
+cameras:
+  num_pairs: 10
+
+  # Camera pair configurations
+  pairs:
+    - pair_id: 0
+      mono:
+        camera_id: 0
+        ip_address: "192.168.1.100"
+        mac_address: "00:0C:DF:00:00:00"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono8"
+        frame_rate: 30.0
+        exposure_time: 10000.0  # microseconds
+        gain: 1.0
+        serial_number: "MONO_CAM_00"
+        model_name: "Basler acA7680-30um"
+      thermal:
+        camera_id: 1
+        ip_address: "192.168.1.101"
+        mac_address: "00:0C:DF:00:00:01"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono16"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "THERMAL_CAM_00"
+        model_name: "FLIR ThermalCam"
+      baseline_m: 0.5  # Distance between cameras
+      position: [0.0, 0.0, 10.0]  # [x, y, z] in meters
+      orientation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]  # Rotation matrix
+      calibration_file: "config/calibration_pair_0.json"
+
+    - pair_id: 1
+      mono:
+        camera_id: 2
+        ip_address: "192.168.1.102"
+        mac_address: "00:0C:DF:00:00:02"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono8"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "MONO_CAM_01"
+        model_name: "Basler acA7680-30um"
+      thermal:
+        camera_id: 3
+        ip_address: "192.168.1.103"
+        mac_address: "00:0C:DF:00:00:03"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono16"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "THERMAL_CAM_01"
+        model_name: "FLIR ThermalCam"
+      baseline_m: 0.5
+      position: [100.0, 0.0, 10.0]
+      orientation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+      calibration_file: "config/calibration_pair_1.json"
+
+    - pair_id: 2
+      mono:
+        camera_id: 4
+        ip_address: "192.168.1.104"
+        mac_address: "00:0C:DF:00:00:04"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono8"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "MONO_CAM_02"
+        model_name: "Basler acA7680-30um"
+      thermal:
+        camera_id: 5
+        ip_address: "192.168.1.105"
+        mac_address: "00:0C:DF:00:00:05"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono16"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "THERMAL_CAM_02"
+        model_name: "FLIR ThermalCam"
+      baseline_m: 0.5
+      position: [200.0, 0.0, 10.0]
+      orientation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+      calibration_file: "config/calibration_pair_2.json"
+
+    - pair_id: 3
+      mono:
+        camera_id: 6
+        ip_address: "192.168.1.106"
+        mac_address: "00:0C:DF:00:00:06"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono8"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "MONO_CAM_03"
+        model_name: "Basler acA7680-30um"
+      thermal:
+        camera_id: 7
+        ip_address: "192.168.1.107"
+        mac_address: "00:0C:DF:00:00:07"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono16"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "THERMAL_CAM_03"
+        model_name: "FLIR ThermalCam"
+      baseline_m: 0.5
+      position: [300.0, 0.0, 10.0]
+      orientation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+      calibration_file: "config/calibration_pair_3.json"
+
+    - pair_id: 4
+      mono:
+        camera_id: 8
+        ip_address: "192.168.1.108"
+        mac_address: "00:0C:DF:00:00:08"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono8"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "MONO_CAM_04"
+        model_name: "Basler acA7680-30um"
+      thermal:
+        camera_id: 9
+        ip_address: "192.168.1.109"
+        mac_address: "00:0C:DF:00:00:09"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono16"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "THERMAL_CAM_04"
+        model_name: "FLIR ThermalCam"
+      baseline_m: 0.5
+      position: [400.0, 0.0, 10.0]
+      orientation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+      calibration_file: "config/calibration_pair_4.json"
+
+    - pair_id: 5
+      mono:
+        camera_id: 10
+        ip_address: "192.168.1.110"
+        mac_address: "00:0C:DF:00:00:0A"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono8"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "MONO_CAM_05"
+        model_name: "Basler acA7680-30um"
+      thermal:
+        camera_id: 11
+        ip_address: "192.168.1.111"
+        mac_address: "00:0C:DF:00:00:0B"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono16"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "THERMAL_CAM_05"
+        model_name: "FLIR ThermalCam"
+      baseline_m: 0.5
+      position: [500.0, 0.0, 10.0]
+      orientation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+      calibration_file: "config/calibration_pair_5.json"
+
+    - pair_id: 6
+      mono:
+        camera_id: 12
+        ip_address: "192.168.1.112"
+        mac_address: "00:0C:DF:00:00:0C"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono8"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "MONO_CAM_06"
+        model_name: "Basler acA7680-30um"
+      thermal:
+        camera_id: 13
+        ip_address: "192.168.1.113"
+        mac_address: "00:0C:DF:00:00:0D"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono16"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "THERMAL_CAM_06"
+        model_name: "FLIR ThermalCam"
+      baseline_m: 0.5
+      position: [600.0, 0.0, 10.0]
+      orientation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+      calibration_file: "config/calibration_pair_6.json"
+
+    - pair_id: 7
+      mono:
+        camera_id: 14
+        ip_address: "192.168.1.114"
+        mac_address: "00:0C:DF:00:00:0E"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono8"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "MONO_CAM_07"
+        model_name: "Basler acA7680-30um"
+      thermal:
+        camera_id: 15
+        ip_address: "192.168.1.115"
+        mac_address: "00:0C:DF:00:00:0F"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono16"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "THERMAL_CAM_07"
+        model_name: "FLIR ThermalCam"
+      baseline_m: 0.5
+      position: [700.0, 0.0, 10.0]
+      orientation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+      calibration_file: "config/calibration_pair_7.json"
+
+    - pair_id: 8
+      mono:
+        camera_id: 16
+        ip_address: "192.168.1.116"
+        mac_address: "00:0C:DF:00:00:10"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono8"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "MONO_CAM_08"
+        model_name: "Basler acA7680-30um"
+      thermal:
+        camera_id: 17
+        ip_address: "192.168.1.117"
+        mac_address: "00:0C:DF:00:00:11"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono16"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "THERMAL_CAM_08"
+        model_name: "FLIR ThermalCam"
+      baseline_m: 0.5
+      position: [800.0, 0.0, 10.0]
+      orientation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+      calibration_file: "config/calibration_pair_8.json"
+
+    - pair_id: 9
+      mono:
+        camera_id: 18
+        ip_address: "192.168.1.118"
+        mac_address: "00:0C:DF:00:00:12"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono8"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "MONO_CAM_09"
+        model_name: "Basler acA7680-30um"
+      thermal:
+        camera_id: 19
+        ip_address: "192.168.1.119"
+        mac_address: "00:0C:DF:00:00:13"
+        width: 7680
+        height: 4320
+        pixel_format: "Mono16"
+        frame_rate: 30.0
+        exposure_time: 10000.0
+        gain: 1.0
+        serial_number: "THERMAL_CAM_09"
+        model_name: "FLIR ThermalCam"
+      baseline_m: 0.5
+      position: [900.0, 0.0, 10.0]
+      orientation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+      calibration_file: "config/calibration_pair_9.json"
+
+  # Hardware trigger synchronization
+  trigger:
+    enabled: true
+    source: "external"  # external, software, freerun
+    frequency: 30.0  # Hz
+    delay_us: 0.0
+
+  # Network settings (GigE Vision)
+  network:
+    packet_size: 9000  # MTU (Jumbo frames)
+    packet_delay: 1000  # microseconds
+    bandwidth_reserve: 10.0  # Percent
+    timeout_ms: 1000
+
+# ============================================================================
+# VOXEL GRID CONFIGURATION
+# ============================================================================
+voxel_grid:
+  # Grid dimensions
+  center: [0.0, 0.0, 500.0]  # [x, y, z] in meters
+  size: [5000.0, 5000.0, 2000.0]  # [width, height, depth] in meters
+  base_resolution: 1.0  # meters per voxel
+
+  # Level of Detail (LOD) settings
+  enable_lod: true
+  lod_levels:
+    ultra_high:
+      resolution: 0.1  # meters
+      max_distance: 100.0  # meters
+    high:
+      resolution: 0.25
+      max_distance: 500.0
+    medium:
+      resolution: 0.5
+      max_distance: 1000.0
+    low:
+      resolution: 1.0
+      max_distance: 5000.0
+    ultra_low:
+      resolution: 2.0
+      max_distance: 10000.0
+
+  # Memory management
+  max_memory_mb: 500
+  enable_compression: true
+  prune_threshold: 0.01
+  update_rate_hz: 30.0
+
+  # Dynamic grid management
+  auto_adjust: true
+  adjustment_margin_m: 500.0
+  min_size: [1000.0, 1000.0, 500.0]
+
+# ============================================================================
+# DETECTION AND TRACKING CONFIGURATION
+# ============================================================================
+detection:
+  # Motion detection thresholds
+  motion_threshold: 0.2
+  min_object_size_px: 10
+  max_object_size_px: 1000
+
+  # Detection confidence
+  detection_confidence: 0.5
+  confirmation_threshold: 3  # Frames before track confirmed
+
+  # Tracking parameters
+  max_tracks: 200
+  max_age: 10  # Frames without detection before deletion
+  iou_threshold: 0.3
+  max_velocity: 50.0  # pixels/frame
+
+  # Occlusion handling
+  enable_occlusion_recovery: true
+  occlusion_timeout_frames: 30
+
+  # Performance
+  enable_kalman_filter: true
+  enable_trajectory_prediction: true
+
+# Fusion settings
+fusion:
+  # Thermal-monochrome fusion
+  thermal_threshold: 0.3
+  mono_threshold: 0.2
+  confidence_threshold: 0.6
+
+  # Registration
+  registration_update_interval_s: 1.0
+  ransac_threshold: 3.0
+  max_iterations: 1000
+
+  # Enhancement
+  enable_thermal_enhancement: true
+  low_light_threshold: 0.1
+  thermal_palette: "iron"  # iron, rainbow, grayscale
+
+  # False positive reduction
+  enable_false_positive_reduction: true
+  cross_validation_required: true
+
+  # Performance
+  enable_cuda: true
+  num_worker_threads: 4
+
+# ============================================================================
+# NETWORK STREAMING CONFIGURATION
+# ============================================================================
+network:
+  # Protocol settings
+  protocol: "mtrtp"  # Motion Tracking Real-Time Protocol
+  transport: "shared_memory"  # shared_memory, udp, tcp
+
+  # Shared memory settings
+  shared_memory:
+    name: "/mtrtp_motion_tracking"
+    size_mb: 64
+    num_buffers: 3
+
+  # UDP settings
+  udp:
+    host: "0.0.0.0"
+    port: 8888
+    buffer_size: 65536
+    multicast: false
+    multicast_group: "239.1.1.1"
+
+  # TCP settings
+  tcp:
+    host: "0.0.0.0"
+    port: 8889
+    max_connections: 10
+    keep_alive: true
+
+  # Compression
+  compression: "lz4"  # none, lz4, zstd
+  compression_level: 1
+
+  # Streaming
+  stream_coordinates: true
+  stream_camera_pose: true
+  stream_tracking: true
+  stream_system_status: true
+  update_rate_hz: 30.0
+
+# ============================================================================
+# PERFORMANCE TUNING
+# ============================================================================
+performance:
+  # Threading
+  num_processing_threads: 8
+  num_fusion_threads: 4
+  num_tracking_threads: 2
+
+  # GPU acceleration
+  enable_gpu: true
+  gpu_device_id: 0
+  cuda_streams: 4
+
+  # Memory management
+  enable_memory_pooling: true
+  preallocate_buffers: true
+  max_buffer_age_frames: 60
+
+  # Pipeline optimization
+  enable_prefetch: true
+  pipeline_depth: 3
+  enable_parallel_processing: true
+
+  # Priority settings
+  process_priority: "high"  # normal, high, realtime
+  thread_affinity: true
+  numa_aware: true
+
+# ============================================================================
+# MONITORING AND LOGGING
+# ============================================================================
+monitoring:
+  # System monitoring
+  enabled: true
+  update_rate_hz: 10.0
+
+  # Metrics collection
+  collect_performance_metrics: true
+  collect_hardware_metrics: true
+  collect_network_metrics: true
+  collect_camera_metrics: true
+  collect_detection_metrics: true
+
+  # History
+  history_size: 300  # samples (30 seconds at 10Hz)
+  save_metrics: true
+  metrics_file: "logs/system_metrics.json"
+
+  # Alerts
+  enable_alerts: true
+  alert_thresholds:
+    cpu_percent: 90
+    memory_percent: 90
+    gpu_temp_celsius: 85
+    camera_drop_rate_percent: 5
+    tracking_latency_ms: 100
+
+  # Health checks
+  health_check_interval_s: 5.0
+  auto_recovery: true
+  max_recovery_attempts: 3
+
+logging:
+  # Log files
+  log_dir: "logs"
+  log_file: "motion_tracking.log"
+  max_file_size_mb: 100
+  backup_count: 5
+
+  # Log levels by component
+  levels:
+    root: "INFO"
+    camera: "INFO"
+    detection: "INFO"
+    tracking: "INFO"
+    fusion: "INFO"
+    voxel: "INFO"
+    network: "INFO"
+    pipeline: "INFO"
+    monitor: "WARNING"
+
+  # Log format
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+
+  # Console output
+  console_output: true
+  console_level: "INFO"
+  colorized: true
+
+# ============================================================================
+# DATA RECORDING
+# ============================================================================
+recording:
+  # Enable recording
+  enabled: false
+
+  # Recording paths
+  output_dir: "recordings"
+  session_name: "session_{timestamp}"
+
+  # What to record
+  record_raw_video: false
+  record_motion_data: true
+  record_tracking_data: true
+  record_system_metrics: true
+
+  # Video recording
+  video_codec: "h265"
+  video_quality: 23
+  video_fps: 30.0
+
+  # Data format
+  data_format: "msgpack"  # json, msgpack, protobuf
+  compression: true
+
+  # Storage limits
+  max_session_size_gb: 100
+  auto_cleanup: true
+  retention_days: 30
+
+# ============================================================================
+# CALIBRATION SETTINGS
+# ============================================================================
+calibration:
+  # Calibration files directory
+  calibration_dir: "config/calibration"
+
+  # Auto-calibration
+  auto_calibrate: false
+  calibration_interval_hours: 24
+
+  # Validation
+  validate_on_startup: true
+  max_calibration_error_px: 2.0
+  min_calibration_points: 100
+
+  # Online calibration refinement
+  enable_online_refinement: false
+  refinement_interval_s: 300
+
+# ============================================================================
+# SAFETY AND LIMITS
+# ============================================================================
+limits:
+  # Resource limits
+  max_cpu_percent: 95
+  max_memory_percent: 90
+  max_gpu_temp_celsius: 85
+  max_network_bandwidth_mbps: 9000
+
+  # Operational limits
+  min_camera_fps: 25.0
+  max_camera_drop_rate_percent: 5.0
+  max_processing_latency_ms: 100
+  max_tracking_latency_ms: 50
+
+  # Emergency shutdown
+  enable_emergency_shutdown: true
+  shutdown_on_overheat: true
+  shutdown_on_critical_error: true
+
+# ============================================================================
+# DEVELOPMENT AND DEBUG
+# ============================================================================
+debug:
+  # Debug mode
+  enabled: false
+
+  # Profiling
+  enable_profiling: false
+  profile_output: "logs/profile.txt"
+
+  # Visualization
+  enable_visualization: false
+  visualization_fps: 10.0
+
+  # Simulation mode
+  simulation_mode: false
+  synthetic_data: false
+
+  # Testing
+  inject_errors: false
+  error_rate: 0.001

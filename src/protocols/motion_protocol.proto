@@ -1,0 +1,392 @@
+// Motion Tracking Real-Time Protocol (MTRTP)
+// Version: 1.0.0
+// High-performance protocol buffer definitions for motion tracking systems
+
+syntax = "proto3";
+
+package mtrtp;
+
+// Protocol version for backward compatibility
+option optimize_for = SPEED;
+
+// ============================================================================
+// CORE DATA TYPES
+// ============================================================================
+
+// 3D coordinate with high precision
+message Vec3 {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+// Quaternion for rotation representation
+message Quaternion {
+  float w = 1;
+  float x = 2;
+  float y = 3;
+  float z = 4;
+}
+
+// 3x3 Matrix for compact transformations
+message Mat3x3 {
+  repeated float data = 1 [packed=true]; // 9 elements, row-major
+}
+
+// Timestamp with microsecond precision
+message Timestamp {
+  int64 seconds = 1;
+  int32 microseconds = 2;
+}
+
+// ============================================================================
+// MOTION COORDINATE MESSAGES
+// ============================================================================
+
+// Single motion point with velocity
+message MotionPoint {
+  uint32 point_id = 1;              // Unique point identifier
+  Vec3 position = 2;                // 3D position in world coordinates
+  Vec3 velocity = 3;                // Velocity vector (m/s)
+  float confidence = 4;             // Tracking confidence [0.0-1.0]
+  Timestamp timestamp = 5;          // Capture timestamp
+  uint32 frame_id = 6;              // Frame sequence number
+}
+
+// Batch of motion points for efficient transmission
+message MotionBatch {
+  repeated MotionPoint points = 1;
+  uint32 batch_id = 2;
+  Timestamp batch_timestamp = 3;
+  uint32 total_points = 4;
+  bytes compression_metadata = 5;   // Optional compression info
+}
+
+// Motion coordinate message with trajectory tracking
+message MotionCoordinateMessage {
+  uint32 message_id = 1;
+  uint32 protocol_version = 2;      // For backward compatibility
+  Timestamp timestamp = 3;
+
+  oneof payload {
+    MotionPoint single_point = 4;
+    MotionBatch batch_points = 5;
+  }
+
+  // Optional fields for extended functionality
+  map<string, string> metadata = 6;
+  uint32 checksum = 7;              // CRC32 for error detection
+}
+
+// ============================================================================
+// CAMERA POSE MESSAGES
+// ============================================================================
+
+// Camera intrinsics
+message CameraIntrinsics {
+  float focal_length_x = 1;
+  float focal_length_y = 2;
+  float principal_point_x = 3;
+  float principal_point_y = 4;
+  repeated float distortion_coeffs = 5 [packed=true]; // k1, k2, p1, p2, k3
+  uint32 image_width = 6;
+  uint32 image_height = 7;
+}
+
+// Camera extrinsics (pose)
+message CameraExtrinsics {
+  Vec3 position = 1;                // Camera position in world coords
+  Quaternion orientation = 2;       // Camera orientation
+  Mat3x3 rotation_matrix = 3;       // Alternative rotation representation
+  Vec3 translation = 4;             // Translation vector
+}
+
+// Complete camera pose message
+message CameraPoseMessage {
+  uint32 message_id = 1;
+  uint32 protocol_version = 2;
+  Timestamp timestamp = 3;
+
+  uint32 camera_id = 4;             // Multi-camera support
+  CameraExtrinsics extrinsics = 5;
+  CameraIntrinsics intrinsics = 6;  // Optional, sent periodically
+
+  // Motion data
+  Vec3 linear_velocity = 7;
+  Vec3 angular_velocity = 8;
+
+  // Quality metrics
+  float pose_confidence = 9;
+  uint32 tracked_features = 10;
+
+  map<string, string> metadata = 11;
+  uint32 checksum = 12;
+}
+
+// ============================================================================
+// TARGET TRACKING MESSAGES
+// ============================================================================
+
+// Bounding box for target localization
+message BoundingBox {
+  Vec3 min_corner = 1;
+  Vec3 max_corner = 2;
+  Vec3 center = 3;
+  Vec3 dimensions = 4;              // width, height, depth
+}
+
+// Target tracking state
+enum TrackingState {
+  TRACKING_UNKNOWN = 0;
+  TRACKING_INITIALIZING = 1;
+  TRACKING_ACTIVE = 2;
+  TRACKING_OCCLUDED = 3;
+  TRACKING_LOST = 4;
+  TRACKING_REACQUIRED = 5;
+}
+
+// Target classification
+enum TargetType {
+  TARGET_UNKNOWN = 0;
+  TARGET_RIGID_BODY = 1;
+  TARGET_DEFORMABLE = 2;
+  TARGET_ARTICULATED = 3;
+  TARGET_POINT_CLOUD = 4;
+}
+
+// Individual target tracking data
+message TrackedTarget {
+  uint32 target_id = 1;
+  string target_name = 2;
+  TargetType target_type = 3;
+  TrackingState state = 4;
+
+  // Pose information
+  Vec3 position = 5;
+  Quaternion orientation = 6;
+  BoundingBox bbox = 7;
+
+  // Motion data
+  Vec3 velocity = 8;
+  Vec3 angular_velocity = 9;
+  Vec3 acceleration = 10;
+
+  // Quality metrics
+  float tracking_confidence = 11;
+  float visibility_ratio = 12;      // Percentage visible
+  uint32 tracked_points = 13;
+
+  // Prediction (for occlusion handling)
+  Vec3 predicted_position = 14;
+  Quaternion predicted_orientation = 15;
+  float prediction_horizon = 16;    // Seconds into future
+
+  Timestamp timestamp = 17;
+  uint32 frame_id = 18;
+}
+
+// Target tracking message (can contain multiple targets)
+message TargetTrackingMessage {
+  uint32 message_id = 1;
+  uint32 protocol_version = 2;
+  Timestamp timestamp = 3;
+
+  repeated TrackedTarget targets = 4;
+  uint32 total_targets = 5;
+  uint32 active_targets = 6;
+
+  // Global tracking metrics
+  float overall_confidence = 7;
+  uint32 frame_id = 8;
+
+  map<string, string> metadata = 9;
+  uint32 checksum = 10;
+}
+
+// ============================================================================
+// SYSTEM STATUS MESSAGES
+// ============================================================================
+
+// Component health status
+enum HealthStatus {
+  HEALTH_UNKNOWN = 0;
+  HEALTH_OK = 1;
+  HEALTH_WARNING = 2;
+  HEALTH_ERROR = 3;
+  HEALTH_CRITICAL = 4;
+  HEALTH_OFFLINE = 5;
+}
+
+// System component types
+enum ComponentType {
+  COMPONENT_UNKNOWN = 0;
+  COMPONENT_CAMERA = 1;
+  COMPONENT_PROCESSOR = 2;
+  COMPONENT_TRACKER = 3;
+  COMPONENT_NETWORK = 4;
+  COMPONENT_STORAGE = 5;
+  COMPONENT_DISPLAY = 6;
+}
+
+// Individual component status
+message ComponentStatus {
+  uint32 component_id = 1;
+  string component_name = 2;
+  ComponentType component_type = 3;
+  HealthStatus health = 4;
+
+  // Performance metrics
+  float cpu_usage = 5;              // Percentage
+  float memory_usage = 6;           // MB
+  float temperature = 7;            // Celsius
+  float fps = 8;                    // Frames per second
+
+  // Network metrics (if applicable)
+  uint64 messages_sent = 9;
+  uint64 messages_received = 10;
+  uint64 bytes_sent = 11;
+  uint64 bytes_received = 12;
+  float packet_loss_rate = 13;
+  float latency_ms = 14;
+
+  // Error tracking
+  uint32 error_count = 15;
+  string last_error = 16;
+  Timestamp last_error_time = 17;
+
+  Timestamp uptime_start = 18;
+  map<string, string> metadata = 19;
+}
+
+// System-wide status message
+message SystemStatusMessage {
+  uint32 message_id = 1;
+  uint32 protocol_version = 2;
+  Timestamp timestamp = 3;
+
+  string system_id = 4;
+  HealthStatus overall_health = 5;
+
+  repeated ComponentStatus components = 6;
+
+  // Global performance metrics
+  float overall_cpu_usage = 7;
+  float overall_memory_usage = 8;
+  float message_throughput = 9;     // Messages per second
+  float data_throughput_mbps = 10;
+
+  // System capabilities
+  uint32 max_fps = 11;
+  uint32 max_targets = 12;
+  uint32 max_cameras = 13;
+
+  // Resource availability
+  float available_memory_mb = 14;
+  float available_storage_gb = 15;
+
+  map<string, string> metadata = 16;
+  uint32 checksum = 17;
+}
+
+// ============================================================================
+// STREAM CONTROL MESSAGES
+// ============================================================================
+
+// Stream control commands
+enum StreamCommand {
+  STREAM_UNKNOWN = 0;
+  STREAM_START = 1;
+  STREAM_STOP = 2;
+  STREAM_PAUSE = 3;
+  STREAM_RESUME = 4;
+  STREAM_CONFIGURE = 5;
+  STREAM_HEARTBEAT = 6;
+}
+
+// Transport type selection
+enum TransportType {
+  TRANSPORT_AUTO = 0;
+  TRANSPORT_UDP = 1;
+  TRANSPORT_TCP = 2;
+  TRANSPORT_SHARED_MEMORY = 3;
+  TRANSPORT_UNIX_SOCKET = 4;
+}
+
+// Compression options
+enum CompressionType {
+  COMPRESSION_NONE = 0;
+  COMPRESSION_LZ4 = 1;
+  COMPRESSION_ZSTD = 2;
+  COMPRESSION_SNAPPY = 3;
+}
+
+// Stream configuration
+message StreamConfig {
+  TransportType transport = 1;
+  CompressionType compression = 2;
+  uint32 max_message_rate = 3;      // Messages per second
+  uint32 buffer_size = 4;           // Bytes
+  bool enable_checksum = 5;
+  uint32 timeout_ms = 6;
+  string endpoint = 7;              // IP:port or shared mem name
+}
+
+// Control message for stream management
+message StreamControlMessage {
+  uint32 message_id = 1;
+  uint32 protocol_version = 2;
+  Timestamp timestamp = 3;
+
+  StreamCommand command = 4;
+  StreamConfig config = 5;
+
+  string subscriber_id = 6;
+  map<string, string> parameters = 7;
+  uint32 checksum = 8;
+}
+
+// ============================================================================
+// UNIFIED MESSAGE ENVELOPE
+// ============================================================================
+
+// Message types for routing
+enum MessageType {
+  MSG_UNKNOWN = 0;
+  MSG_MOTION_COORDINATE = 1;
+  MSG_CAMERA_POSE = 2;
+  MSG_TARGET_TRACKING = 3;
+  MSG_SYSTEM_STATUS = 4;
+  MSG_STREAM_CONTROL = 5;
+}
+
+// Universal message envelope for transport layer
+message MessageEnvelope {
+  uint32 envelope_id = 1;
+  uint32 protocol_version = 2;      // Current: 1
+  MessageType message_type = 3;
+  Timestamp timestamp = 4;
+
+  // Payload (one of the message types)
+  oneof payload {
+    MotionCoordinateMessage motion = 5;
+    CameraPoseMessage camera_pose = 6;
+    TargetTrackingMessage target_tracking = 7;
+    SystemStatusMessage system_status = 8;
+    StreamControlMessage stream_control = 9;
+  }
+
+  // Transport metadata
+  uint32 sequence_number = 10;
+  uint32 total_size_bytes = 11;
+  CompressionType compression = 12;
+
+  // QoS and routing
+  uint32 priority = 13;             // 0=lowest, 255=highest
+  uint32 ttl_ms = 14;               // Time to live
+  string source_id = 15;
+  repeated string destination_ids = 16;
+
+  // Integrity
+  uint32 checksum = 17;             // CRC32 of payload
+  bytes signature = 18;             // Optional cryptographic signature
+}

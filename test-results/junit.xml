@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="3" failures="0" skipped="0" tests="3" time="1.910" timestamp="2025-11-13T18:08:57.936744+00:00" hostname="runsc"><testcase classname="" name="tests.integration.test_camera_sync" time="0.000"><error message="collection failure">ImportError while importing test module '/home/user/Pixeltovoxelprojector/tests/integration/test_camera_sync.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.11/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/integration/test_camera_sync.py:24: in &lt;module&gt;
+    from camera.camera_sync import (
+src/camera/__init__.py:23: in &lt;module&gt;
+    from .position_broadcast import (
+src/camera/position_broadcast.py:18: in &lt;module&gt;
+    import zmq
+E   ModuleNotFoundError: No module named 'zmq'</error></testcase><testcase classname="" name="tests.integration.test_full_pipeline" time="0.000"><error message="collection failure">ImportError while importing test module '/home/user/Pixeltovoxelprojector/tests/integration/test_full_pipeline.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.11/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/integration/test_full_pipeline.py:26: in &lt;module&gt;
+    from camera.camera_sync import CameraSynchronizer, FrameMetadata, SyncMode, SyncedFrameSet
+src/camera/__init__.py:23: in &lt;module&gt;
+    from .position_broadcast import (
+src/camera/position_broadcast.py:18: in &lt;module&gt;
+    import zmq
+E   ModuleNotFoundError: No module named 'zmq'</error></testcase><testcase classname="" name="tests.integration.test_streaming" time="0.000"><error message="collection failure">ImportError while importing test module '/home/user/Pixeltovoxelprojector/tests/integration/test_streaming.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.11/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/integration/test_streaming.py:26: in &lt;module&gt;
+    from network.distributed_processor import (
+src/network/__init__.py:6: in &lt;module&gt;
+    from .cluster_config import (
+src/network/cluster_config.py:10: in &lt;module&gt;
+    import psutil
+E   ModuleNotFoundError: No module named 'psutil'</error></testcase></testsuite></testsuites>

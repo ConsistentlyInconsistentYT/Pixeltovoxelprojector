@@ -1,0 +1,25 @@
+# Camera Tracking System Requirements
+
+# Core numerical computing
+numpy>=1.21.0
+scipy>=1.7.0
+
+# ZeroMQ for high-performance broadcasting
+pyzmq>=22.0.0
+
+# Coordinate transformations and rotations
+pyproj>=3.0.0  # For advanced geodetic transformations (optional)
+
+# Optional: Real sensor integration
+# Uncomment if using real hardware sensors
+# pyserial>=3.5  # For serial IMU/GPS communication
+# smbus2>=0.4.0  # For I2C IMU sensors
+# spidev>=3.5    # For SPI IMU sensors
+
+# Optional: ROS integration (if using ROS for sensor data)
+# rclpy>=3.0.0  # ROS2 Python client
+# sensor-msgs>=4.0.0  # ROS sensor messages
+
+# Development and testing
+pytest>=7.0.0
+pytest-cov>=3.0.0

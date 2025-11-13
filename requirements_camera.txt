@@ -1,0 +1,13 @@
+# Camera Synchronization System Requirements
+
+# Core dependencies
+numpy>=1.20.0
+
+# Optional: For full camera functionality
+# opencv-python>=4.5.0  # For calibration and image processing
+# pypylon>=1.7.0        # For Basler GigE cameras
+# simple-pyspin>=0.2.0  # For FLIR cameras
+
+# Development dependencies
+# pytest>=6.0.0         # For running tests
+# pytest-cov>=2.0.0     # For test coverage

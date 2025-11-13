@@ -1,0 +1,18 @@
+# Benchmark Suite Requirements
+
+# Core dependencies
+numpy>=1.21.0
+matplotlib>=3.5.0
+psutil>=5.9.0
+
+# OpenCV for video/image processing
+opencv-python>=4.6.0
+
+# NVIDIA GPU monitoring (optional, but recommended)
+nvidia-ml-py3>=7.352.0
+
+# Data analysis and visualization
+pandas>=1.3.0
+
+# Additional plotting
+seaborn>=0.11.0

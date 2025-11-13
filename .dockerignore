@@ -1,0 +1,132 @@
+# ============================================================================
+# Docker Ignore File
+# Exclude unnecessary files from Docker build context
+# ============================================================================
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build artifacts
+build/
+dist/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Documentation
+docs/_build/
+*.pdf
+*.tex
+
+# Data and output (usually large)
+data/
+output/
+logs/
+*.log
+
+# Models and weights
+*.pth
+*.pt
+*.h5
+*.pkl
+*.ckpt
+
+# Media files (can be large)
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+
+# Compressed files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Testing
+.tox/
+.coverage.*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Node (if any)
+node_modules/
+npm-debug.log*
+
+# Profiling
+*.prof
+
+# Cache
+.cache/
+*.cache

@@ -1,0 +1,105 @@
+{
+  "description": "Performance baselines for PixelToVoxelProjector",
+  "version": "1.0",
+  "last_updated": "2025-11-13",
+  "hardware_profile": {
+    "cpu": "Generic x86_64",
+    "gpu": "NVIDIA GPU (Compute Capability 6.0+)",
+    "memory_gb": 16,
+    "gpu_memory_gb": 8
+  },
+  "baselines": {
+    "voxel_ray_casting_500": {
+      "name": "Voxel Ray Casting (500^3)",
+      "min_throughput_fps": 35.0,
+      "max_latency_p99_ms": 35.0,
+      "max_memory_mb": 2500.0,
+      "max_gpu_memory_mb": 4000.0,
+      "description": "Ray casting through 500x500x500 voxel grid with 1000 rays"
+    },
+    "motion_detection_8k": {
+      "name": "Motion Detection (8K)",
+      "min_throughput_fps": 25.0,
+      "max_latency_p99_ms": 50.0,
+      "max_memory_mb": 3000.0,
+      "max_gpu_memory_mb": 2000.0,
+      "description": "Motion detection on 7680x4320 frames"
+    },
+    "voxel_grid_updates": {
+      "name": "Voxel Grid Updates",
+      "min_throughput_fps": 80.0,
+      "max_latency_p99_ms": 15.0,
+      "max_memory_mb": 2500.0,
+      "max_gpu_memory_mb": 3500.0,
+      "description": "10,000 random updates to 500^3 grid"
+    },
+    "camera_8k_decode": {
+      "name": "8K Video Decode",
+      "min_decode_fps": 30.0,
+      "max_p99_latency_ms": 40.0,
+      "description": "H.264/H.265 8K decode performance"
+    },
+    "camera_motion_extraction_8k": {
+      "name": "8K Motion Extraction",
+      "min_motion_fps": 40.0,
+      "max_p99_latency_ms": 30.0,
+      "description": "Motion extraction on 8K frames"
+    },
+    "multi_camera_sync": {
+      "name": "Multi-Camera Sync (8 cameras)",
+      "max_avg_sync_error_ms": 2.0,
+      "max_max_sync_error_ms": 5.0,
+      "min_sync_accuracy_percent": 95.0,
+      "description": "Synchronization accuracy for 8 cameras"
+    },
+    "network_tcp_throughput": {
+      "name": "TCP Throughput",
+      "min_throughput_mbps": 8000.0,
+      "description": "TCP throughput on localhost"
+    },
+    "network_udp_throughput": {
+      "name": "UDP Throughput",
+      "min_throughput_mbps": 8000.0,
+      "max_packet_loss_percent": 0.5,
+      "description": "UDP throughput with packet loss tracking"
+    },
+    "network_tcp_latency": {
+      "name": "TCP Latency",
+      "max_avg_latency_ms": 1.0,
+      "max_p99_latency_ms": 2.0,
+      "description": "TCP round-trip latency"
+    },
+    "network_streaming_latency": {
+      "name": "Streaming Latency",
+      "max_avg_latency_ms": 1.5,
+      "max_p99_latency_ms": 3.0,
+      "max_packet_loss_percent": 0.5,
+      "max_jitter_ms": 0.5,
+      "description": "Streaming latency at 30 FPS"
+    },
+    "cuda_raycast": {
+      "name": "CUDA Ray Casting",
+      "min_throughput_gops": 50.0,
+      "max_kernel_time_ms": 10.0,
+      "min_memory_bandwidth_gbps": 200.0,
+      "description": "CUDA DDA ray casting kernel"
+    },
+    "cuda_voxel_updates": {
+      "name": "CUDA Voxel Updates",
+      "min_throughput_gops": 20.0,
+      "max_kernel_time_ms": 5.0,
+      "description": "CUDA atomic voxel update kernel"
+    },
+    "cuda_memory_bandwidth": {
+      "name": "CUDA Memory Bandwidth",
+      "min_memory_bandwidth_gbps": 300.0,
+      "description": "CUDA coalesced memory access bandwidth"
+    }
+  },
+  "notes": [
+    "These baselines are for reference only",
+    "Actual performance will vary based on hardware",
+    "Adjust baselines based on your specific system",
+    "Run benchmarks and save your own baselines for regression detection"
+  ]
+}
