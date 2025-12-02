@@ -445,10 +445,10 @@ int main(int argc, char** argv) {
     //------------------------------------------
     // Basic parameters
     float motion_threshold = 2.0f;  // difference threshold
-    float alpha = 0.1f;            // distance-based attenuation factor
+    //float alpha = 0.1f;            // distance-based attenuation factor
 
     for(auto &kv : frames_by_cam) {
-        int cam_id = kv.first;
+        //int cam_id = kv.first;
         auto &cam_frames = kv.second;
 
         if(cam_frames.size() < 2) {
@@ -521,8 +521,8 @@ int main(int argc, char** argv) {
 
                     // Accumulate
                     for(const auto &rs : steps) {
-                        float dist = rs.distance;
-                        float attenuation = 1.f/(1.f + alpha*dist);
+                        //float dist = rs.distance;
+                        //float attenuation = 1.f/(1.f + alpha*dist);
                         float val = pix_val * 1.f; //attenuation, need to fix this to work better so that it scales with the size of the image as it would appear at that distance but for now this works; 
                         int idx = rs.ix*N*N + rs.iy*N + rs.iz;
                         voxel_grid[idx] += val;
